@@ -1,0 +1,5 @@
+[
+  {"id":"earbuds","title":"Wireless Earbuds X","price":39.99,"image":"https://images.unsplash.com/photo-1585386959984-a41552261c39?w=400"},
+  {"id":"watch","title":"Smartwatch Pro V2","price":59.99,"image":"https://images.unsplash.com/photo-1511385348-a52b4a160dc2?w=400"},
+  {"id":"hoodie","title":"Urban Hoodie Classic","price":34.99,"image":"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400"}
+]
