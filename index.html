@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A1 Reps — Diamond Shine Edition</title>
+<title>A1 Reps — Shooting Star Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
@@ -75,7 +75,7 @@ body{
 }
 .banner-track span{margin:0 8rem}
 
-/* === NAVIGATION BAR (CENTERED LOGO) === */
+/* === NAVIGATION WITH CENTER LOGO === */
 .nav{
   display:flex;
   justify-content:space-between;
@@ -105,22 +105,22 @@ body{
   transition:color .2s ease;
 }
 .nav a:hover{color:#00eaff;}
+
+/* Small animated logo in nav */
 .nav-logo{
   font-family:'Orbitron',sans-serif;
   font-weight:900;
-  font-size:1.6rem;
-  letter-spacing:.1em;
+  font-size:1.2rem;
+  letter-spacing:.12em;
   background:linear-gradient(90deg,#00eaff,#6a5bff,#00eaff);
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
-  text-shadow:0 0 12px rgba(0,234,255,.6),0 0 20px rgba(106,91,255,.4);
-  animation:logoPulse 2s ease-in-out infinite alternate;
+  text-shadow:0 0 10px rgba(0,234,255,.6),0 0 20px rgba(106,91,255,.4);
+  animation:logoShine 2.5s linear infinite,logoPulse 1.5s ease-in-out infinite alternate;
 }
-@keyframes logoPulse{
-  from{transform:scale(1);}
-  to{transform:scale(1.1);}
-}
+@keyframes logoShine{from{background-position:0%}to{background-position:200%}}
+@keyframes logoPulse{0%{transform:scale(1)}100%{transform:scale(1.15)}}
 
 /* === HERO LOGO === */
 header{
@@ -137,7 +137,6 @@ header{
   animation:logoShine 3s linear infinite,logoPulse 1.5s ease-in-out infinite alternate;
   text-shadow:0 0 15px rgba(130,170,255,.6),0 0 25px rgba(0,234,255,.4);
 }
-@keyframes logoShine{from{background-position:0%}to{background-position:200%}}
 
 /* === TAGLINE === */
 .tagline{
@@ -175,31 +174,22 @@ header{
 .card .meta{color:var(--muted);font-size:.85rem}
 .card .price{color:var(--aqua);font-weight:700;margin:4px 0}
 
-/* === DIAGONAL DIAMOND SHINE === */
+/* === SHOOTING STAR SPARKLE === */
 .card::after{
   content:"";
   position:absolute;
-  top:-150%;
-  left:-150%;
-  width:300%;
-  height:300%;
-  background:linear-gradient(
-    45deg,
-    rgba(255,255,255,0) 45%,
-    rgba(255,255,255,0.8) 50%,
-    rgba(255,255,255,0) 55%
-  );
-  transform:translate(0,0);
-  animation:shineDiag 8s ease-in-out infinite;
-  pointer-events:none;
-  mix-blend-mode:screen;
-  opacity:0.5;
-  filter:blur(1px);
+  width:6px;height:6px;
+  background:radial-gradient(circle,#fff 0%,#baf7ff 50%,transparent 100%);
+  border-radius:50%;
+  box-shadow:0 0 10px 5px rgba(255,255,255,0.5);
+  top:0;left:0;
+  animation:shootStar 7s ease-in-out infinite;
 }
-@keyframes shineDiag{
-  0%{transform:translate(-50%,-50%) rotate(45deg);}
-  60%{transform:translate(50%,50%) rotate(45deg);}
-  100%{transform:translate(50%,50%) rotate(45deg);}
+@keyframes shootStar{
+  0%{transform:translate(-10%, -10%) scale(0.8);opacity:0.5;}
+  20%{opacity:1;}
+  50%{transform:translate(110%, 110%) scale(1.2);opacity:1;}
+  100%{transform:translate(120%, 120%) scale(0.8);opacity:0;}
 }
 
 /* === FOOTER === */
@@ -239,6 +229,7 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   </div>
 </nav>
 
+<!-- HERO SECTION -->
 <header>
   <div class="logo">A1 REPS</div>
 </header>
@@ -287,7 +278,7 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   <p>Secure checkout system placeholder.</p>
 </section>
 
-<footer>© A1 Reps — Diamond Shine Edition.</footer>
+<footer>© A1 Reps — Shooting Star Edition.</footer>
 
 <script>
 /* stars */
