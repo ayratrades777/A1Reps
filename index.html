@@ -15,9 +15,8 @@
   --blur:14px; --radius:16px;
   --mx:50%; --my:50%;
 }
-
-/* === base === */
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
   min-height:100vh;
   color:var(--white);
@@ -29,38 +28,22 @@ body{
 
 /* === starlight field === */
 #stars{
-  position:fixed;
-  inset:0;
-  z-index:-1;      /* sits below content but above background */
-  overflow:hidden;
-  pointer-events:none;
+  position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
 }
 .star{
-  position:absolute;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,0.95) 0%,rgba(0,255,255,0.6) 80%,transparent 100%);
-  box-shadow:0 0 6px rgba(0,255,255,0.4);
-  opacity:.15;
-  animation:twinkle 6s ease-in-out infinite;
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(0,255,255,.6) 80%,transparent 100%);
+  box-shadow:0 0 6px rgba(0,255,255,.4);
+  opacity:.15;animation:twinkle 6s ease-in-out infinite;
 }
-@keyframes twinkle{
-  0%,100%{opacity:.15;transform:scale(1);}
-  50%{opacity:1;transform:scale(1.8);}
-}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.8)}}
 
-/* subtle moving color glow */
 body::after{
   content:'';position:fixed;inset:0;z-index:-2;
-  background:radial-gradient(40vw 40vw at var(--mx) var(--my),
-      rgba(30,230,230,.15),transparent 60%),
-      linear-gradient(120deg,var(--bg1),var(--bg2));
-  background-blend-mode:screen;
-  animation:slowGlow 30s linear infinite;
+  background:radial-gradient(40vw 40vw at var(--mx) var(--my),rgba(30,230,230,.15),transparent 60%),linear-gradient(120deg,var(--bg1),var(--bg2));
+  background-blend-mode:screen;animation:slowGlow 30s linear infinite;
 }
-@keyframes slowGlow{
-  from{filter:hue-rotate(0deg);}
-  to{filter:hue-rotate(360deg);}
-}
+@keyframes slowGlow{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}
 
 /* === header === */
 header{
@@ -68,11 +51,9 @@ header{
   padding:16px 20px;position:sticky;top:0;z-index:10;
   backdrop-filter:blur(12px);
 }
-.left-nav{
-  position:absolute;left:20px;display:flex;gap:1rem;
-}
+.left-nav{position:absolute;left:20px;display:flex;gap:1rem}
 .left-nav a{
-  color:var(--white);text-decoration:none;font-weight:600;opacity:.8;
+  color:var(--white);text-decoration:none;font-weight:600;opacity:.8;cursor:pointer;
 }
 .left-nav a:hover{opacity:1}
 .right-space{position:absolute;right:20px;width:120px}
@@ -125,15 +106,21 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
 
 <header>
   <nav class="left-nav">
-    <a href="#">Home</a>
-    <a href="#grid">Categories</a>
+    <a id="navHome">Home</a>
+    <a id="navCats">Categories</a>
   </nav>
   <div class="logo">A1&nbsp;REPS</div>
   <div class="right-space"></div>
 </header>
 
+<!-- dummy hero to give a scroll target -->
+<section id="home" style="height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+  <h1 style="font-family:'Orbitron',sans-serif;font-size:2.5rem;letter-spacing:.1em;">Welcome to A1 REPS</h1>
+  <p style="max-width:600px;color:var(--muted);margin-top:12px;">Luxury-inspired dropshipping store under a starlit digital sky. Scroll down to explore the collections.</p>
+</section>
+
 <div class="container">
-  <section class="grid" id="grid">
+  <section class="grid" id="categories">
     <article class="card">
       <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&q=80" alt="">
       <div class="title">A1 Runner Mesh Comfort</div>
@@ -164,9 +151,9 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
 <footer>© A1 Reps — starlit glassmorphic design.</footer>
 
 <script>
-/* create the bright stars */
+/* create visible stars */
 const field=document.getElementById('stars');
-const count=220; // star density
+const count=220;
 for(let i=0;i<count;i++){
   const s=document.createElement('div');
   s.className='star';
@@ -178,7 +165,7 @@ for(let i=0;i<count;i++){
   field.appendChild(s);
 }
 
-/* gentle pointer glow */
+/* mouse glow */
 let raf=null;
 window.addEventListener('pointermove',e=>{
   if(raf)return;
@@ -189,6 +176,14 @@ window.addEventListener('pointermove',e=>{
     document.documentElement.style.setProperty('--my',y+'%');
     raf=null;
   });
+});
+
+/* navigation actions */
+document.getElementById('navHome').addEventListener('click',()=>{
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+document.getElementById('navCats').addEventListener('click',()=>{
+  document.getElementById('categories').scrollIntoView({behavior:'smooth'});
 });
 </script>
 </body>
