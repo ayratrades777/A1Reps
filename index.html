@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A1 Reps — Deep Space Indigo</title>
+<title>A1 Reps — Stellar Spark Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
@@ -77,7 +77,7 @@ body{
 
 /* === LOGO === */
 header{
-  display:flex;justify-content:center;align-items:center;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
   padding:16px 20px;position:sticky;top:40px;z-index:10;
   backdrop-filter:blur(12px);
 }
@@ -88,9 +88,31 @@ header{
   -webkit-background-clip:text;background-clip:text;color:transparent;
   animation:logoShine 3s linear infinite,logoPulse 1.5s ease-in-out infinite alternate;
   text-shadow:0 0 15px rgba(130,170,255,.6),0 0 25px rgba(0,234,255,.4);
+  margin-bottom:0.5rem;
 }
 @keyframes logoShine{from{background-position:0%}to{background-position:200%}}
 @keyframes logoPulse{0%{transform:scale(1)}100%{transform:scale(1.08)}}
+
+/* === TAGLINE SECTION === */
+.tagline{
+  text-align:center;
+  padding:2rem 1rem;
+}
+.tagline h2{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.4rem;
+  letter-spacing:.08em;
+  color:#ffeb3b;
+  text-shadow:0 0 10px rgba(255,235,59,.7),0 0 20px rgba(255,255,255,.3);
+  margin-bottom:0.5rem;
+}
+.tagline p{
+  max-width:650px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.6;
+}
 
 /* === PRODUCTS === */
 .container{max-width:1240px;margin:40px auto;padding:0 16px}
@@ -106,21 +128,46 @@ header{
 .card .meta{color:var(--muted);font-size:.85rem}
 .card .price{color:var(--aqua);font-weight:700;margin:4px 0}
 
-/* glowing orbit border */
-.card::before{
-  content:"";position:absolute;inset:0;border-radius:inherit;
-  padding:2px;
-  background:linear-gradient(270deg,#00eaff,#6a5bff,#00eaff);
-  background-size:400% 400%;
-  animation:borderRun 3s linear infinite;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
+/* === SHOOTING STAR BORDER === */
+.card::before,
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
 }
-@keyframes borderRun{0%{background-position:400% 0}100%{background-position:0 0}}
+.card::before{
+  background:conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255,255,255,0) 340deg,
+    #00eaff 350deg,
+    #ffffff 360deg
+  );
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:shootBorder 3s linear infinite;
+}
+.card::after{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff,#00eaff 60%,transparent 100%);
+  animation:shootSpark 3s linear infinite;
+}
+@keyframes shootBorder{
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+}
+@keyframes shootSpark{
+  0%{top:0;left:0;opacity:1}
+  25%{top:0;left:calc(100% - 6px);}
+  50%{top:calc(100% - 6px);left:calc(100% - 6px);}
+  75%{top:calc(100% - 6px);left:0;}
+  100%{top:0;left:0;opacity:1}
+}
 
+/* === FOOTER === */
 footer{text-align:center;color:var(--muted);padding:24px 0}
 </style>
 </head>
@@ -142,12 +189,13 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   </div>
 </div>
 
-<header><div class="logo">A1 REPS</div></header>
-
-<section id="home" style="height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-  <h1 style="font-family:'Orbitron',sans-serif;font-size:2.5rem;letter-spacing:.1em;">Welcome to A1 REPS</h1>
-  <p style="max-width:600px;color:var(--muted);margin-top:12px;">Luxury-inspired dropshipping store under a blue–violet galaxy sky. Scroll down to explore the collections.</p>
-</section>
+<header>
+  <div class="logo">A1 REPS</div>
+  <div class="tagline">
+    <h2>THE #1 MOST TRUSTWORTHY REPS WEBSITE! 🏆</h2>
+    <p>To date, we have delivered thousands of orders, and our website stands out for its verified reviews and customer satisfaction.</p>
+  </div>
+</header>
 
 <div class="container">
   <section class="grid" id="categories">
@@ -178,7 +226,7 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   </section>
 </div>
 
-<footer>© A1 Reps — Deep Space Indigo.</footer>
+<footer>© A1 Reps — Stellar Spark Edition.</footer>
 
 <script>
 /* stars */
