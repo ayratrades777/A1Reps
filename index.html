@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A1 Reps — Shooting Star Edition</title>
+<title>A1 Reps — Diamond Light Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
@@ -14,7 +14,6 @@
   --violet:#6a5bff;
   --stroke:rgba(255,255,255,.12);
   --radius:16px;
-  --mx:50%; --my:50%;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -27,16 +26,15 @@ body{
 }
 
 /* === STARFIELD === */
-#stars{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
+#stars{position:fixed;inset:0;z-index:-1;pointer-events:none;}
 .star{
   position:absolute;border-radius:50%;
   background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(130,170,255,.6) 80%,transparent 100%);
-  box-shadow:0 0 6px rgba(130,170,255,.4);
   opacity:.15;animation:twinkle 6s ease-in-out infinite;
 }
-@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.8)}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
 
-/* === GALACTIC FOG === */
+/* === FOG === */
 .fog-layer{
   position:fixed;inset:0;z-index:-2;
   background:
@@ -44,22 +42,14 @@ body{
     radial-gradient(circle at 75% 65%,rgba(0,160,255,.12) 0%,transparent 70%);
   background-blend-mode:screen;
   filter:blur(100px);
-  animation:fogLeft 150s linear infinite;
+  animation:fogMove 160s linear infinite alternate;
 }
-.fog-layer:nth-child(2){
-  animation:fogRight 200s linear infinite;
-  opacity:.8;
-}
-@keyframes fogLeft{
+@keyframes fogMove{
   0%{transform:translateX(0) translateY(0);}
-  100%{transform:translateX(-20%) translateY(10%);}
-}
-@keyframes fogRight{
-  0%{transform:translateX(0) translateY(0);}
-  100%{transform:translateX(20%) translateY(-10%);}
+  100%{transform:translateX(10%) translateY(-10%);}
 }
 
-/* === TICKER HEADER === */
+/* === BANNER === */
 .banner{
   background:linear-gradient(90deg,#ffeb3b,#ffd500);
   color:#000;font-weight:700;overflow:hidden;white-space:nowrap;
@@ -75,60 +65,39 @@ body{
 }
 .banner-track span{margin:0 8rem}
 
-/* === NAVIGATION WITH CENTER LOGO === */
+/* === NAV BAR === */
 .nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:0.75rem 2rem;
+  padding:0.75rem 3rem;
   background:rgba(255,255,255,.05);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(255,255,255,.15);
-  position:sticky;
-  top:42px;
-  z-index:30;
+  position:sticky;top:42px;z-index:30;
 }
-.nav-left, .nav-right{
-  display:flex;
-  align-items:center;
-  flex:1;
-}
-.nav-center{
-  flex:0 0 auto;
-  text-align:center;
-}
+.nav-left,.nav-right{display:flex;align-items:center;flex:1;}
+.nav-right{justify-content:flex-end;}
+.nav-center{flex:0 0 auto;text-align:center;}
 .nav a{
-  color:#E9F3FF;
-  text-decoration:none;
-  font-weight:600;
-  margin:0 1rem;
-  transition:color .2s ease;
+  color:#E9F3FF;text-decoration:none;font-weight:600;margin:0 1rem;transition:color .2s ease;
 }
 .nav a:hover{color:#00eaff;}
-
-/* Small animated logo in nav */
 .nav-logo{
   font-family:'Orbitron',sans-serif;
   font-weight:900;
   font-size:1.2rem;
   letter-spacing:.12em;
   background:linear-gradient(90deg,#00eaff,#6a5bff,#00eaff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  text-shadow:0 0 10px rgba(0,234,255,.6),0 0 20px rgba(106,91,255,.4);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 12px rgba(0,234,255,.6),0 0 20px rgba(106,91,255,.4);
   animation:logoShine 2.5s linear infinite,logoPulse 1.5s ease-in-out infinite alternate;
 }
 @keyframes logoShine{from{background-position:0%}to{background-position:200%}}
 @keyframes logoPulse{0%{transform:scale(1)}100%{transform:scale(1.15)}}
 
 /* === HERO LOGO === */
-header{
-  display:flex;justify-content:center;align-items:center;
-  padding:2rem 20px 1rem;
-  position:relative;
-  z-index:10;
-}
+header{display:flex;justify-content:center;align-items:center;padding:2rem 20px 1rem;}
 .logo{
   font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:.18em;
   font-size:clamp(2.8rem,6vw,4rem);
@@ -139,70 +108,58 @@ header{
 }
 
 /* === TAGLINE === */
-.tagline{
-  text-align:center;
-  margin-top:1rem;
-  padding:1.5rem 1rem;
-}
+.tagline{text-align:center;margin-top:1rem;padding:1.5rem 1rem;}
 .tagline h2{
-  font-family:'Orbitron',sans-serif;
-  font-size:1.4rem;
-  letter-spacing:.08em;
-  color:#ffeb3b;
-  text-shadow:0 0 10px rgba(255,235,59,.7),0 0 20px rgba(255,255,255,.3);
+  font-family:'Orbitron',sans-serif;font-size:1.4rem;letter-spacing:.08em;
+  color:#ffeb3b;text-shadow:0 0 10px rgba(255,235,59,.7),0 0 20px rgba(255,255,255,.3);
   margin-bottom:0.5rem;
 }
-.tagline p{
-  max-width:650px;
-  margin:0 auto;
-  color:var(--muted);
-  font-size:1rem;
-  line-height:1.6;
-}
+.tagline p{max-width:650px;margin:0 auto;color:var(--muted);font-size:1rem;line-height:1.6;}
 
 /* === PRODUCT GRID === */
-.container{max-width:1240px;margin:40px auto;padding:0 16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.container{max-width:1240px;margin:40px auto;padding:0 16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;}
 .card{
   position:relative;background:rgba(255,255,255,.08);
   border:1px solid var(--stroke);border-radius:var(--radius);
-  padding:12px;overflow:hidden;transition:transform .15s,box-shadow .2s;
+  padding:12px;overflow:hidden;
+  transition:transform .15s,box-shadow .2s;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.45)}
-.card img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:8px}
-.card .title{font-weight:600}
-.card .meta{color:var(--muted);font-size:.85rem}
-.card .price{color:var(--aqua);font-weight:700;margin:4px 0}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.45);}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:8px;}
+.card .title{font-weight:600;}
+.card .meta{color:var(--muted);font-size:.85rem;}
+.card .price{color:var(--aqua);font-weight:700;margin:4px 0;}
 
-/* === SHOOTING STAR SPARKLE === */
+/* === DIAMOND SHOOTING LIGHT AROUND BOX === */
 .card::after{
   content:"";
   position:absolute;
-  width:6px;height:6px;
-  background:radial-gradient(circle,#fff 0%,#baf7ff 50%,transparent 100%);
-  border-radius:50%;
-  box-shadow:0 0 10px 5px rgba(255,255,255,0.5);
+  width:14px;height:14px;
+  background:radial-gradient(circle,#fff 0%,#aaf5ff 40%,#00eaff 80%,transparent 100%);
+  border-radius:25%;
   top:0;left:0;
-  animation:shootStar 7s ease-in-out infinite;
+  box-shadow:0 0 12px 6px rgba(0,234,255,.6);
+  animation:orbit 6s linear infinite;
 }
-@keyframes shootStar{
-  0%{transform:translate(-10%, -10%) scale(0.8);opacity:0.5;}
-  20%{opacity:1;}
-  50%{transform:translate(110%, 110%) scale(1.2);opacity:1;}
-  100%{transform:translate(120%, 120%) scale(0.8);opacity:0;}
+@keyframes orbit{
+  0%{top:0;left:0;}
+  25%{top:0;left:calc(100% - 14px);}
+  50%{top:calc(100% - 14px);left:calc(100% - 14px);}
+  75%{top:calc(100% - 14px);left:0;}
+  100%{top:0;left:0;}
 }
 
 /* === FOOTER === */
-footer{text-align:center;color:var(--muted);padding:24px 0}
+footer{text-align:center;color:var(--muted);padding:24px 0;}
 </style>
 </head>
 <body>
 
 <div class="fog-layer"></div>
-<div class="fog-layer"></div>
 <div id="stars"></div>
 
-<!-- Yellow endless ticker -->
+<!-- Banner -->
 <div class="banner">
   <div class="banner-track">
     <span>✈️ Free Shipping Worldwide 🌎</span>
@@ -214,7 +171,7 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   </div>
 </div>
 
-<!-- NAVIGATION -->
+<!-- Nav -->
 <nav class="nav">
   <div class="nav-left">
     <a href="#home">Home</a>
@@ -224,12 +181,11 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
     <a href="#home" class="nav-logo">A1 REPS</a>
   </div>
   <div class="nav-right">
-    <a href="#cart">🛒 Cart</a>
+    <a href="#cart" style="margin-right:1.5rem;">🛒 Cart</a>
     <a href="#checkout">💳 Checkout</a>
   </div>
 </nav>
 
-<!-- HERO SECTION -->
 <header>
   <div class="logo">A1 REPS</div>
 </header>
@@ -278,10 +234,10 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   <p>Secure checkout system placeholder.</p>
 </section>
 
-<footer>© A1 Reps — Shooting Star Edition.</footer>
+<footer>© A1 Reps — Diamond Light Edition.</footer>
 
 <script>
-/* stars */
+/* stars generator */
 const field=document.getElementById('stars');
 for(let i=0;i<220;i++){
   const s=document.createElement('div');
@@ -293,18 +249,6 @@ for(let i=0;i<220;i++){
   s.style.animationDelay=(Math.random()*6)+'s';
   field.appendChild(s);
 }
-/* mouse glow */
-let raf=null;
-window.addEventListener('pointermove',e=>{
-  if(raf)return;
-  raf=requestAnimationFrame(()=>{
-    const x=(e.clientX/window.innerWidth)*100;
-    const y=(e.clientY/window.innerHeight)*100;
-    document.documentElement.style.setProperty('--mx',x+'%');
-    document.documentElement.style.setProperty('--my',y+'%');
-    raf=null;
-  });
-});
 </script>
 </body>
 </html>
