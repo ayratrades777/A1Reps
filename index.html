@@ -4,185 +4,174 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A1 Reps — Global Gear. Urban Edge.</title>
-<meta name="description" content="A1 Reps — AliExpress-style marketplace in a blue–teal glassmorphic theme with animated background and motion cards." />
+<meta name="description" content="A1 Reps — AliExpress-style marketplace in an animated blue–teal glassmorphic theme." />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg1:#081A2A; --bg2:#062032; --glass:rgba(255,255,255,0.08); --stroke:rgba(255,255,255,0.18);
-  --white:#E9F3FF; --muted:#B9CCDA; --cyan:#1EE6E6; --aqua:#6FFFE9; --violet:#6A6CF6; --teal:#08C0A6;
+  --white:#E9F3FF; --muted:#B9CCDA; --cyan:#1EE6E6; --aqua:#6FFFE9; --violet:#6A6CF6;
   --shadow:0 12px 32px rgba(0,0,0,.35); --radius:16px; --blur:14px;
-  --logo-shine-speed:6s;
-  --mx:50%; --my:50%; /* mouse reactive center */
+  --mx:50%; --my:50%;
 }
-
 *{box-sizing:border-box} html,body{height:100%}
 body{
-  margin:0; color:var(--white); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  overflow-x:hidden;
+  margin:0; color:var(--white); font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif; overflow-x:hidden;
 }
 
-/* === Animated gradient background (breathing) === */
+/* === Animated gradient background === */
 body::before{
   content:''; position:fixed; inset:0; z-index:-3;
   background:
     radial-gradient(60vw 60vw at 10% 0%, #0C2C47 0%, transparent 60%),
     radial-gradient(80vw 80vw at 90% 100%, #0A3A52 0%, transparent 60%),
     linear-gradient(120deg, var(--bg1), var(--bg2) 60%, #041420);
-  background-size: 100% 100%, 100% 100%, 300% 300%;
-  animation: bgBreath 30s linear infinite;
+  background-size:100% 100%,100% 100%,300% 300%;
+  animation:bgBreath 30s linear infinite;
 }
 @keyframes bgBreath{
-  0%   { background-position: 0% 0%, 0% 0%,   0% 0%; }
-  50%  { background-position: 0% 0%, 0% 0%, 100% 100%; }
-  100% { background-position: 0% 0%, 0% 0%, 200% 0%; }
+  0%{background-position:0 0,0 0,0 0}
+  50%{background-position:0 0,0 0,100% 100%}
+  100%{background-position:0 0,0 0,200% 0}
 }
 
-/* === Parallax glow layer that follows the mouse === */
+/* === Mouse reactive glow === */
 body::after{
   content:''; position:fixed; inset:-10%; z-index:-2; pointer-events:none;
   background:
     radial-gradient(40vw 40vw at var(--mx) var(--my), rgba(31,230,230,.18), transparent 60%),
     radial-gradient(50vw 50vw at calc(var(--mx) + 10%) calc(var(--my) + 10%), rgba(106,108,246,.16), transparent 65%);
-  filter: saturate(1.2) brightness(1.05);
-  transition: background-position 120ms linear;
+  transition:background-position 120ms linear;
 }
 
-/* === Glassmorphism utility === */
+/* === Glassmorphism base === */
 .glass{
   background:var(--glass); border:1px solid var(--stroke); border-radius:var(--radius);
-  backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
-  box-shadow: var(--shadow);
+  backdrop-filter:blur(var(--blur)); -webkit-backdrop-filter:blur(var(--blur));
+  box-shadow:var(--shadow);
 }
-
-a{color:inherit; text-decoration:none}
+a{color:inherit;text-decoration:none}
 .btn{
-  display:inline-flex; align-items:center; gap:.5rem; padding:.65rem 1rem; border-radius:12px; cursor:pointer;
+  display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border-radius:12px;
   background:linear-gradient(90deg,rgba(31,230,230,.15),rgba(106,108,246,.15));
-  border:1px solid rgba(255,255,255,.18); color:var(--white); font-weight:600;
-  transition: transform .2s ease, box-shadow .2s ease;
+  border:1px solid rgba(255,255,255,.18);color:var(--white);font-weight:600;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
 }
-.btn:hover{outline:1px solid var(--aqua); transform: translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.35)}
-.badge{font-size:.75rem; padding:.25rem .5rem; border-radius:999px; background:rgba(111,255,233,.15); border:1px solid rgba(111,255,233,.35)}
+.btn:hover{outline:1px solid var(--aqua);transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.badge{font-size:.75rem;padding:.25rem .5rem;border-radius:999px;background:rgba(111,255,233,.15);border:1px solid rgba(111,255,233,.35)}
 
 /* === Topbar === */
-.topbar{display:flex; gap:1rem; align-items:center; padding:12px 16px; position:sticky; top:0; z-index:60}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;position:sticky;top:0;z-index:60}
 .logo{
-  font-family:'Orbitron',sans-serif; font-weight:700; letter-spacing:.14em; font-size:1.25rem;
-  background:linear-gradient(90deg, var(--aqua), var(--violet), var(--aqua));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  animation:logoShine var(--logo-shine-speed) linear infinite;
-  text-shadow:0 0 10px rgba(31,230,230,.25);
+  font-family:'Orbitron',sans-serif;
+  font-weight:900;
+  letter-spacing:.18em;
+  font-size:clamp(2.8rem,6vw,4rem);
+  background:linear-gradient(90deg,#00ffff,#6A6CF6,#00ffff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:logoShine 3s linear infinite, logoPulse 1.5s ease-in-out infinite alternate;
+  text-shadow:0 0 12px rgba(0,255,255,.7),0 0 24px rgba(106,108,246,.5),0 0 48px rgba(0,255,255,.3);
+  transition:transform .3s ease;
 }
-@keyframes logoShine{ from{background-position:0%} to{background-position:200%} }
-
-.search{flex:1; display:flex; gap:.5rem}
-.search input{
-  flex:1; padding:.8rem 1rem; border-radius:12px; border:1px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.06); color:var(--white); outline:none;
-}
-.navlinks{display:flex; gap:.75rem; flex-wrap:wrap}
-.navlinks a{padding:.5rem .75rem; border-radius:10px; opacity:.9}
-.navlinks a:hover{background:rgba(255,255,255,.06); opacity:1}
+@keyframes logoShine{from{background-position:0%}to{background-position:200%}}
+@keyframes logoPulse{0%{transform:scale(1);filter:brightness(1)}100%{transform:scale(1.08);filter:brightness(1.25)}}
+.navlinks{display:flex;gap:1rem}
+.navlinks a{padding:.5rem .75rem;border-radius:10px;opacity:.9}
+.navlinks a:hover{background:rgba(255,255,255,.06);opacity:1}
 
 /* === Layout === */
-.container{max-width:1240px; margin:18px auto; padding:0 16px; display:grid; grid-template-columns:280px 1fr; gap:16px}
-@media (max-width: 1020px){ .container{grid-template-columns:1fr} .category-rail{order:2} }
+.container{max-width:1240px;margin:18px auto;padding:0 16px;display:grid;grid-template-columns:280px 1fr;gap:16px}
+@media(max-width:1020px){.container{grid-template-columns:1fr}.category-rail{order:2}}
 
-/* === Category Rail & Mega Menu === */
-.category-rail{position:sticky; top:64px; align-self:start; padding:12px}
-.cat-title{font-weight:700; letter-spacing:.06em; margin:6px 0 10px; color:var(--aqua)}
-.cat-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px}
+/* === Category rail === */
+.category-rail{position:sticky;top:64px;align-self:start;padding:12px}
+.cat-title{font-weight:700;letter-spacing:.06em;margin:6px 0 10px;color:var(--aqua)}
+.cat-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
 .cat-item{
-  display:flex; align-items:center; justify-content:space-between; gap:8px; padding:10px 12px; border-radius:12px;
-  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.10); cursor:pointer; position:relative;
-  transition: transform .15s ease, box-shadow .2s ease;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);cursor:pointer;position:relative;
+  transition:transform .15s,box-shadow .2s;
 }
-.cat-item:hover{background:rgba(31,230,230,.08); border-color:rgba(111,255,233,.35); transform: translateY(-2px)}
-.cat-item span{font-size:.95rem; color:var(--white)}
+.cat-item:hover{background:rgba(31,230,230,.08);border-color:rgba(111,255,233,.35);transform:translateY(-2px)}
+.cat-item span{font-size:.95rem;color:var(--white)}
 .cat-item small{color:var(--muted)}
 
-.mega{ position:absolute; left:calc(100% + 10px); top:0; min-width:560px; max-width:720px; display:none; z-index:50; }
+/* === Mega menu === */
+.mega{position:absolute;left:calc(100% + 10px);top:0;min-width:560px;max-width:720px;display:none;z-index:50}
 .cat-item:hover .mega{display:block}
-.mega .panel{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:14px; border-radius:14px }
-.mega a{
-  display:block; padding:.55rem .65rem; border-radius:10px; background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.12); color:var(--white); font-size:.9rem;
-  transition: transform .15s ease, background .15s ease;
-}
-.mega a:hover{background:rgba(31,230,230,.12); border-color:rgba(111,255,233,.4); transform: translateX(2px)}
+.mega .panel{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:14px;border-radius:14px}
+.mega a{display:block;padding:.55rem .65rem;border-radius:10px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);color:var(--white);font-size:.9rem;transition:transform .15s,background .15s}
+.mega a:hover{background:rgba(31,230,230,.12);border-color:rgba(111,255,233,.4);transform:translateX(2px)}
 
-/* === Hero + Deals === */
+/* === Hero === */
 .hero{padding:16px}
-.hero-inner{display:grid; grid-template-columns:1.3fr .7fr; gap:16px}
-@media (max-width: 1020px){ .hero-inner{grid-template-columns:1fr} }
-.hero-card{min-height:180px; display:flex; flex-direction:column; justify-content:center; padding:24px}
-.hero-card h1{margin:0 0 10px; font-size:1.8rem}
-.hero-card p{margin:0 0 16px; color:var(--muted)}
-.deals{display:grid; grid-template-columns:1fr; gap:12px}
-.deal-card{display:flex; align-items:center; gap:12px; padding:14px}
-.deal-card img{width:72px; height:72px; border-radius:12px; object-fit:cover}
-.timer{font-weight:700; color:var(--aqua)}
+.hero-inner{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}
+@media(max-width:1020px){.hero-inner{grid-template-columns:1fr}}
+.hero-card{min-height:180px;display:flex;flex-direction:column;justify-content:center;padding:24px}
+.hero-card h1{margin:0 0 10px;font-size:1.8rem}
+.hero-card p{margin:0 0 16px;color:var(--muted)}
+.deals{display:grid;grid-template-columns:1fr;gap:12px}
+.deal-card{display:flex;align-items:center;gap:12px;padding:14px}
+.deal-card img{width:72px;height:72px;border-radius:12px;object-fit:cover}
+.timer{font-weight:700;color:var(--aqua)}
 
 /* === Filters === */
-.filters{display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; padding:12px}
+.filters{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;padding:12px}
 .filters .chip{
-  padding:.45rem .75rem; border-radius:999px; border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.05); font-size:.85rem; color:var(--white); cursor:pointer;
-  transition: transform .15s ease;
+  padding:.45rem .75rem;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.05);font-size:.85rem;color:var(--white);cursor:pointer;transition:transform .15s;
 }
-.filters .chip.active{border-color:rgba(111,255,233,.5); background:rgba(31,230,230,.12); transform: translateY(-1px)}
+.filters .chip.active{border-color:rgba(111,255,233,.5);background:rgba(31,230,230,.12);transform:translateY(-1px)}
 
-/* === Product Grid with tilt motion === */
-.grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; padding:14px; perspective: 1000px}
-@media (max-width:1200px){ .grid{grid-template-columns:repeat(3,1fr)} }
-@media (max-width:820px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:520px){ .grid{grid-template-columns:1fr} }
+/* === Product grid with faster idle tilt === */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:14px;perspective:1000px}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:820px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
 
+@keyframes idleTilt{
+  0%,100%{transform:rotateX(0deg) rotateY(0deg);}
+  20%{transform:rotateX(3deg) rotateY(4deg);}
+  40%{transform:rotateX(-2deg) rotateY(-3deg);}
+  60%{transform:rotateX(2deg) rotateY(-2deg);}
+  80%{transform:rotateX(-3deg) rotateY(3deg);}
+}
 .card{
-  padding:10px; display:flex; flex-direction:column; gap:8px;
-  transition: transform .15s ease, box-shadow .2s ease;
-  transform-style: preserve-3d; will-change: transform;
+  padding:10px;display:flex;flex-direction:column;gap:8px;transform-style:preserve-3d;will-change:transform;
+  transition:transform .15s,box-shadow .2s;animation:idleTilt 6s ease-in-out infinite alternate;
 }
-.card:hover{ box-shadow:0 16px 36px rgba(0,0,0,.45) }
-.card img{width:100%; height:180px; object-fit:cover; border-radius:12px; transform: translateZ(20px)}
-.card .title{font-weight:600; transform: translateZ(18px)}
-.card .meta{display:flex; align-items:center; gap:8px; color:var(--muted); font-size:.85rem; transform: translateZ(12px)}
-.card .price{font-weight:700; color:var(--aqua); transform: translateZ(16px)}
-.card .cta{margin-top:6px; transform: translateZ(18px)}
+.card:hover{animation:none;box-shadow:0 16px 36px rgba(0,0,0,.45)}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:12px;transform:translateZ(20px)}
+.card .title{font-weight:600;transform:translateZ(18px)}
+.card .meta{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem;transform:translateZ(12px)}
+.card .price{font-weight:700;color:var(--aqua);transform:translateZ(16px)}
+.card .cta{margin-top:6px;transform:translateZ(18px)}
 
-/* === Footer + reveal === */
-footer{max-width:1240px; margin:40px auto; padding:12px 16px; color:var(--muted); text-align:center}
-.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease}
-.reveal.show{opacity:1; transform:translateY(0)}
+/* === Footer === */
+footer{max-width:1240px;margin:40px auto;padding:12px 16px;color:var(--muted);text-align:center}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<!-- Topbar -->
 <header class="topbar glass">
   <div class="logo">A1 REPS</div>
   <nav class="navlinks">
-    <a href="#">Home</a><a href="#">Flash Deals</a><a href="#">Top Ranking</a><a href="#">New Arrivals</a>
+    <a href="#">Home</a>
+    <a href="#catList">Categories</a>
   </nav>
-  <div class="search">
-    <input id="q" placeholder="Search in A1 Reps: earbuds, hoodies, RC drones…" />
-    <button class="btn" id="searchBtn">Search</button>
-  </div>
-  <a class="btn" href="#">Cart (0)</a>
 </header>
 
 <div class="container">
-  <!-- Category rail + mega menu -->
   <aside class="category-rail glass">
     <div class="cat-title">Categories</div>
     <ul class="cat-list" id="catList"></ul>
   </aside>
 
-  <!-- Main content -->
   <main>
-    <!-- Hero + Deals -->
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-card glass reveal">
@@ -190,7 +179,7 @@ footer{max-width:1240px; margin:40px auto; padding:12px 16px; color:var(--muted)
           <p>AliExpress-style marketplace wrapped in a sleek AI-dashboard look. Explore millions of categories, curated for speed.</p>
           <div class="actions">
             <a class="btn" href="#grid">Shop Categories</a>
-            <span class="badge">Animated gradient + motion cards</span>
+            <span class="badge">Animated everything</span>
           </div>
         </div>
 
@@ -215,7 +204,6 @@ footer{max-width:1240px; margin:40px auto; padding:12px 16px; color:var(--muted)
       </div>
     </section>
 
-    <!-- Filters -->
     <section class="filters glass reveal" style="margin-top:16px">
       <span class="chip active" data-filter="all">All</span>
       <span class="chip" data-filter="Free Shipping">Free Shipping</span>
@@ -225,183 +213,45 @@ footer{max-width:1240px; margin:40px auto; padding:12px 16px; color:var(--muted)
       <span class="chip" data-sort="desc">Price: High→Low</span>
     </section>
 
-    <!-- Product Grid -->
     <section id="grid" class="glass reveal" style="margin-top:16px">
       <div class="grid" id="productGrid"></div>
     </section>
 
     <footer class="glass" style="margin-top:16px">
-      © A1 Reps — AliExpress-style categories. Theme: blue→teal glassmorphism.
+      © A1 Reps — AliExpress-style categories. Blue→teal glassmorphic theme.
     </footer>
   </main>
 </div>
 
 <script>
-/* ===== Reveal on scroll ===== */
+/* reveal on scroll */
 const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');obs.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(n=>obs.observe(n));
 
-/* ===== Animated parallax glow (mouse reactive) ===== */
-(() => {
-  let rafId=null;
-  window.addEventListener('pointermove', (e)=>{
-    if(rafId) return;
-    rafId = requestAnimationFrame(()=>{
-      const x = (e.clientX / window.innerWidth )*100;
-      const y = (e.clientY / window.innerHeight)*100;
-      document.documentElement.style.setProperty('--mx', x+'%');
-      document.documentElement.style.setProperty('--my', y+'%');
-      rafId=null;
-    });
-  }, {passive:true});
-})();
+/* mouse reactive glow */
+(()=>{let raf=null;window.addEventListener('pointermove',e=>{if(raf)return;raf=requestAnimationFrame(()=>{const x=(e.clientX/window.innerWidth)*100;const y=(e.clientY/window.innerHeight)*100;document.documentElement.style.setProperty('--mx',x+'%');document.documentElement.style.setProperty('--my',y+'%');raf=null;});},{passive:true});})();
 
-/* ===== Flash deal countdown (6h) ===== */
-const end = Date.now() + 6*60*60*1000;
-(function tick(){
-  const left = Math.max(0, end - Date.now());
-  const s = Math.floor(left/1000)%60, m = Math.floor(left/60000)%60, h = Math.floor(left/3600000);
-  const fmt = [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');
-  ['timer-1','timer-2'].forEach(id=>{const el=document.getElementById(id); if(el) el.textContent=fmt;});
-  if(left>0) requestAnimationFrame(tick);
-})();
+/* flash deal countdown */
+const end=Date.now()+6*60*60*1000;(function tick(){const left=Math.max(0,end-Date.now());const s=Math.floor(left/1000)%60,m=Math.floor(left/60000)%60,h=Math.floor(left/3600000);const fmt=[h,m,s].map(v=>String(v).padStart(2,'0')).join(':');['timer-1','timer-2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt});if(left>0)requestAnimationFrame(tick);})();
 
-/* ===== Categories + Mega Menu ===== */
-const categories = [
-  { name:'Consumer Electronics', hint:'Audio, Cameras', subs:['Headphones','Speakers','Action Cameras','Drones','Power Banks','Cables & Chargers','VR/AR'] },
-  { name:'Phones & Telecom', hint:'Phones, Cases', subs:['Android Phones','iPhones (accessories)','Phone Cases','Screen Protectors','Earbuds','Smart Trackers'] },
-  { name:'Computer & Office', hint:'Laptops, Peripherals', subs:['Keyboards','Mice','Monitors','Laptop Stands','USB Hubs','Storage & SSD'] },
-  { name:'Home & Garden', hint:'Décor, Kitchen', subs:['Kitchen Tools','Storage','Bedding','Wall Art','Cleaning','Pet Supplies'] },
-  { name:'Home Appliances', hint:'Smart, Cleaning', subs:['Robot Vacuums','Air Purifiers','Coffee Makers','Blenders','Mini Projectors'] },
-  { name:'Jewelry & Watches', hint:'Men & Women', subs:['Smartwatches','Quartz Watches','Necklaces','Rings','Bracelets'] },
-  { name:'Men’s Clothing', hint:'Street, Casual', subs:['Hoodies','Tees','Pants','Tracksuits','Outerwear'] },
-  { name:'Women’s Clothing', hint:'Essentials', subs:['Dresses','Tops','Leggings','Co-ords','Outerwear'] },
-  { name:'Shoes', hint:'Sneakers, Boots', subs:['Running Shoes','Basketball','Casual','Slides','Boots'] },
-  { name:'Sports & Entertainment', hint:'Gym, Outdoors', subs:['Fitness','Cycling','Camping','Sportswear','Fishing'] },
-  { name:'Beauty & Health', hint:'Care, Devices', subs:['Skincare','Hair Tools','Nail Art','Massagers','Grooming'] },
-  { name:'Automobiles & Motorcycles', hint:'Parts, Tools', subs:['Car Electronics','Lights','Detailing','Helmets','Gloves'] },
-  { name:'Tools', hint:'Hand, Power', subs:['Screwdrivers','Power Tools','Soldering','Measuring'] },
-  { name:'Home Improvement', hint:'Hardware', subs:['Switches','Smart Home','Plumbing','Paint'] },
-  { name:'Security & Protection', hint:'CCTV, Smart', subs:['Cameras','Doorbells','Alarms','Safes'] },
-  { name:'Lights & Lighting', hint:'LED, Lamps', subs:['LED Strips','Desk Lamps','Smart Bulbs','Outdoor'] },
-  { name:'Luggage & Bags', hint:'Backpacks', subs:['Backpacks','Crossbody','Travel Bags','Wallets'] },
-  { name:'Toys & Hobbies', hint:'RC, Games', subs:['RC Cars','Blocks','STEM','Board Games'] },
-  { name:'Weddings & Events', hint:'Decor', subs:['Party Decor','Favors','Crafts'] },
-  { name:'Furniture', hint:'Home, Office', subs:['Chairs','Desks','Shelving','Stools'] },
-  { name:'Office & School', hint:'Stationery', subs:['Notebooks','Pens','Organizers','Art Supplies'] },
-  { name:'Hair Extensions & Wigs', hint:'Tools', subs:['Wigs','Extensions','Styling Tools'] }
+/* categories + mega menu */
+const categories=[
+  {name:'Consumer Electronics',hint:'Audio, Cameras',subs:['Headphones','Speakers','Action Cameras','Drones','Power Banks','Cables & Chargers','VR/AR']},
+  {name:'Phones & Telecom',hint:'Phones, Cases',subs:['Android Phones','iPhones (accessories)','Phone Cases','Screen Protectors','Earbuds','Smart Trackers']},
+  {name:'Computer & Office',hint:'Laptops, Peripherals',subs:['Keyboards','Mice','Monitors','Laptop Stands','USB Hubs','Storage & SSD']},
+  {name:'Home & Garden',hint:'Décor, Kitchen',subs:['Kitchen Tools','Storage','Bedding','Wall Art','Cleaning','Pet Supplies']},
+  {name:'Shoes',hint:'Sneakers, Boots',subs:['Running Shoes','Basketball','Casual','Slides','Boots']}
 ];
-
-const catList = document.getElementById('catList');
+const catList=document.getElementById('catList');
 categories.forEach(cat=>{
-  const li = document.createElement('li');
-  li.className = 'cat-item';
-  li.innerHTML = `<span>${cat.name}</span><small>${cat.hint}</small>
-    <div class="mega">
-      <div class="panel glass">
-        ${cat.subs.map(s=>`<a href="#" data-cat="${cat.name}" data-sub="${s}">${s}</a>`).join('')}
-      </div>
-    </div>`;
+  const li=document.createElement('li');
+  li.className='cat-item';
+  li.innerHTML=`<span>${cat.name}</span><small>${cat.hint}</small>
+    <div class="mega"><div class="panel glass">${cat.subs.map(s=>`<a href="#" data-cat="${cat.name}" data-sub="${s}">${s}</a>`).join('')}</div></div>`;
   catList.appendChild(li);
 });
 
-/* ===== Products loader (from products.json) ===== */
-const grid = document.getElementById('productGrid');
-let PRODUCTS = [];
-async function loadProducts(){
-  try{
-    const res = await fetch('products.json', {cache:'no-store'});
-    PRODUCTS = await res.json();
-  }catch(e){ PRODUCTS = []; }
-  render(PRODUCTS);
-}
-function card(p){
-  return `<article class="card glass" data-cat="${p.category}" data-tags="${(p.tags||[]).join(',')}" data-price="${p.price}">
-    <img src="${p.image}" alt="${p.title}" loading="lazy">
-    <div class="title">${p.title}</div>
-    <div class="meta"><span>${p.rating} ★</span> · <span>${p.orders} orders</span> · <span>${p.badge||''}</span></div>
-    <div class="price">$${p.price.toFixed(2)}</div>
-    <a class="btn cta" href="${p.link||'#'}">View</a>
-  </article>`;
-}
-function render(list){ grid.innerHTML = list.map(card).join(''); attachCardTilt(); }
-
-/* ===== Search, filter, sort ===== */
-const q = document.getElementById('q');
-document.getElementById('searchBtn').onclick = () => applyFilters();
-document.querySelectorAll('.filters .chip').forEach(ch=>{
-  ch.addEventListener('click', ()=>{
-    document.querySelectorAll('.filters .chip').forEach(c=>c.classList.remove('active'));
-    ch.classList.add('active');
-    applyFilters();
-  });
-});
-function applyFilters(){
-  const term = (q.value||'').toLowerCase();
-  let list = PRODUCTS.filter(p =>
-    p.title.toLowerCase().includes(term) ||
-    (p.tags||[]).some(t=>t.toLowerCase().includes(term)) ||
-    p.category.toLowerCase().includes(term)
-  );
-  const active = document.querySelector('.filters .chip.active');
-  if(active && active.dataset.filter && active.dataset.filter!=='all'){
-    list = list.filter(p => (p.labels||[]).includes(active.dataset.filter));
-  }
-  const sorter = document.querySelector('.filters .chip[data-sort].active');
-  if(sorter){ list = list.slice().sort((a,b) => sorter.dataset.sort==='asc' ? a.price-b.price : b.price-a.price); }
-  render(list);
-}
-
-/* ===== Mega menu click → filter by subcategory ===== */
-document.addEventListener('click', e=>{
-  const a = e.target.closest('.mega a');
-  if(!a) return;
-  e.preventDefault();
-  const sub = a.getAttribute('data-sub').toLowerCase();
-  const list = PRODUCTS.filter(p => (p.subcategory||'').toLowerCase()===sub);
-  render(list);
-});
-
-/* ===== Card tilt on hover (GPU friendly) ===== */
-function attachCardTilt(){
-  const cards = document.querySelectorAll('.card');
-  cards.forEach(card=>{
-    let raf=null;
-    function onMove(e){
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left)/rect.width;
-      const y = (e.clientY - rect.top )/rect.height;
-      const rx = (0.5 - y) * 10;   // tilt degrees
-      const ry = (x - 0.5) * 12;
-      if(raf) return;
-      raf = requestAnimationFrame(()=>{
-        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
-        raf=null;
-      });
-    }
-    function reset(){ card.style.transform='rotateX(0) rotateY(0)'; }
-    card.addEventListener('pointermove', onMove);
-    card.addEventListener('pointerleave', reset);
-  });
-}
-
-/* ===== Parallax glow also moves slowly on scroll ===== */
-let lastY=0, sraf=null;
-window.addEventListener('scroll', ()=>{
-  if(sraf) return;
-  sraf=requestAnimationFrame(()=>{
-    const y = window.scrollY;
-    if(Math.abs(y-lastY)>2){
-      const cy = Math.max(0, Math.min(100, (y/window.innerHeight)*100));
-      document.documentElement.style.setProperty('--my', (50+cy*0.1)+'%');
-      lastY=y;
-    }
-    sraf=null;
-  });
-});
-
-/* init */
-loadProducts();
-</script>
-</body>
-</html>
+/* load products */
+const grid=document.getElementById('productGrid');let PRODUCTS=[];
+async function loadProducts(){try{const res=await fetch('products.json',{cache:'no-store'});PRODUCTS=await res.json();}catch(e){PRODUCTS=[];}render(PRODUCTS);}
+function card
