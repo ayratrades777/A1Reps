@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A1 Reps — Diamond Spark Edition</title>
+<title>A1 Reps — Diamond Shine Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
@@ -151,62 +151,28 @@ header{
 .card .meta{color:var(--muted);font-size:.85rem}
 .card .price{color:var(--aqua);font-weight:700;margin:4px 0}
 
-/* === DIAMOND SPARK BORDER === */
-.card::before,
+/* === DIAMOND LIGHT GLEAM EFFECT === */
 .card::after{
   content:"";
   position:absolute;
-  inset:0;
-  border-radius:inherit;
+  inset:-30%;
+  background:linear-gradient(
+    75deg,
+    rgba(255,255,255,0) 40%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0) 60%
+  );
+  transform:translateX(-120%) rotate(15deg);
+  animation:gleam 7s ease-in-out infinite;
   pointer-events:none;
+  mix-blend-mode:screen;
+  opacity:0.5;
+  filter:blur(1px);
 }
-.card::before{
-  background:conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(255,255,255,0) 330deg,
-    rgba(255,255,255,.9) 340deg,
-    rgba(0,234,255,.6) 360deg);
-  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;
-  animation:shineLoop 2.5s linear infinite;
-  filter:blur(0.5px);
-}
-.card::after{
-  width:24px;height:24px;
-  border-radius:50%;
-  background:radial-gradient(circle at center,#fff 0%,#e0faff 20%,#00eaff 50%,transparent 100%);
-  box-shadow:0 0 15px 6px rgba(255,255,255,.4);
-  filter:blur(0.3px);
-  animation:shineFollow 2.5s linear infinite, twinkle 1s ease-in-out infinite alternate;
-}
-@keyframes shineLoop{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-@keyframes shineFollow{
-  0%{top:0;left:0;}
-  25%{top:0;left:calc(100% - 24px);}
-  50%{top:calc(100% - 24px);left:calc(100% - 24px);}
-  75%{top:calc(100% - 24px);left:0;}
-  100%{top:0;left:0;}
-}
-@keyframes twinkle{
-  from{opacity:.6;transform:scale(.8);}
-  to{opacity:1;transform:scale(1.3);}
-}
-/* corner sparkles */
-.card .corner-spark{
-  position:absolute;width:10px;height:10px;
-  background:radial-gradient(circle,#fff 0%,#baf7ff 30%,transparent 70%);
-  border-radius:50%;
-  opacity:0;
-  pointer-events:none;
-}
-.card .corner-spark:nth-child(1){top:-2px;left:-2px;animation:cornerFlash 2.5s linear infinite 0s;}
-.card .corner-spark:nth-child(2){top:-2px;right:-2px;animation:cornerFlash 2.5s linear infinite .6s;}
-.card .corner-spark:nth-child(3){bottom:-2px;right:-2px;animation:cornerFlash 2.5s linear infinite 1.2s;}
-.card .corner-spark:nth-child(4){bottom:-2px;left:-2px;animation:cornerFlash 2.5s linear infinite 1.8s;}
-@keyframes cornerFlash{
-  0%,90%,100%{opacity:0;}
-  10%{opacity:1;transform:scale(1.4);}
+@keyframes gleam{
+  0%{transform:translateX(-120%) rotate(15deg);}
+  60%{transform:translateX(120%) rotate(15deg);}
+  100%{transform:translateX(120%) rotate(15deg);}
 }
 
 /* === FOOTER === */
@@ -259,40 +225,24 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
       <div class="title">A1 Runner Mesh Comfort</div>
       <div class="meta">4.7★ · 2100 orders</div>
       <div class="price">$49.99</div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
     </article>
     <article class="card">
       <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1200&q=80" alt="">
       <div class="title">Urban Hoodie Classic</div>
       <div class="meta">4.8★ · 3400 orders</div>
       <div class="price">$34.99</div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
     </article>
     <article class="card">
       <img src="https://images.unsplash.com/photo-1585386959984-a41552261c39?w=1200&q=80" alt="">
       <div class="title">Wireless Earbuds X</div>
       <div class="meta">4.6★ · 8200 orders</div>
       <div class="price">$29.99</div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
     </article>
     <article class="card">
       <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=1200&q=80" alt="">
       <div class="title">Minimal Watch Steel</div>
       <div class="meta">4.9★ · 740 orders</div>
       <div class="price">$59.99</div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
-      <div class="corner-spark"></div>
     </article>
   </section>
 </div>
@@ -307,7 +257,7 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   <p>Secure checkout system placeholder.</p>
 </section>
 
-<footer>© A1 Reps — Diamond Spark Edition.</footer>
+<footer>© A1 Reps — Diamond Shine Edition.</footer>
 
 <script>
 /* stars */
