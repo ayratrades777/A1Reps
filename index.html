@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>A1 Reps — Global Gear. Urban Edge.</title>
-<meta name="description" content="A1 Reps: Cyberpunk-inspired marketplace — dark, neon, and refined.">
+<meta name="description" content="A1 Reps: Cyberpunk marketplace — cyan and violet neon glow.">
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@400;600&display=swap');
 
 :root{
-  --shine-speed:10s;     /* slower shimmer */
-  --flicker-speed:5s;    /* slower flicker */
-  --bg-speed:45s;        /* slower background drift */
+  --shine-speed:10s;
+  --flicker-speed:5s;
+  --bg-speed:25s;
 }
 
 body{
@@ -24,23 +24,24 @@ body{
   overflow-x:hidden;
 }
 
-/* === Darker animated background === */
+/* === CYAN + VIOLET ANIMATED BACKGROUND === */
 body::before{
   content:'';
   position:fixed;
   inset:0;
   z-index:-2;
   background:
-    radial-gradient(30vw 30vw at 30% 40%, rgba(0,255,255,0.1), transparent 70%),
-    radial-gradient(40vw 40vw at 70% 60%, rgba(255,0,255,0.1), transparent 70%),
-    linear-gradient(135deg,#000010,#000,#000010);
-  background-size:100% 100%,100% 100%,400% 400%;
-  animation:darkMist var(--bg-speed) linear infinite;
-  filter:brightness(0.65) contrast(1.4) saturate(1.2);
+    radial-gradient(38vw 38vw at 18% 28%, rgba(0,255,255,0.25), transparent 60%),
+    radial-gradient(44vw 44vw at 82% 72%, rgba(138,43,226,0.25), transparent 60%),
+    radial-gradient(30vw 30vw at 50% 10%, rgba(75,0,130,0.2), transparent 70%),
+    linear-gradient(120deg,#00ffff,#8a2be2,#00ffff);
+  background-size:100% 100%,100% 100%,100% 100%,400% 400%;
+  animation:mist var(--bg-speed) linear infinite;
+  filter:brightness(0.9) contrast(1.3) saturate(1.2);
 }
-@keyframes darkMist{
-  0%{background-position:0% 0%,0% 0%,0% 0%;}
-  100%{background-position:0% 0%,0% 0%,400% 400%;}
+@keyframes mist{
+  0%{background-position:0% 0%,0% 0%,0% 0%,0% 0%;}
+  100%{background-position:0% 0%,0% 0%,0% 0%,400% 400%;}
 }
 
 /* faint scanlines */
@@ -49,23 +50,20 @@ body::after{
   position:fixed;
   inset:0;
   z-index:-1;
-  background:repeating-linear-gradient(0deg,rgba(255,255,255,0.015) 0,rgba(255,255,255,0.015) 1px,transparent 2px);
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,0.02) 0,rgba(255,255,255,0.02) 1px,transparent 2px);
   mix-blend-mode:overlay;
   pointer-events:none;
 }
 
-/* === Logo === */
-.logo-wrap{
-  text-align:center;
-  margin:4rem 0 3rem;
-}
+/* === LOGO === */
+.logo-wrap{text-align:center;margin:4rem 0 3rem;}
 .logo-text{
   font-family:'Orbitron',sans-serif;
   font-size:clamp(2.6rem,6vw,4.4rem);
   letter-spacing:.18em;
   text-transform:uppercase;
   color:#00eaff;
-  background:linear-gradient(90deg,#00ffff,#0099ff,#00ffff);
+  background:linear-gradient(90deg,#00ffff,#8a2be2,#00ffff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   animation:shine var(--shine-speed) linear infinite, flicker var(--flicker-speed) infinite;
@@ -79,18 +77,18 @@ body::after{
   100%{background-position:200%;}
 }
 @keyframes flicker{
-  0%, 90%, 100% {opacity:1;}
-  92%, 95% {opacity:.7;}
+  0%,90%,100%{opacity:1;}
+  92%,95%{opacity:.7;}
 }
 .logo-sub{
-  color:#7ae6ff;
+  color:#b9a7ff;
   letter-spacing:.3em;
   font-size:.85rem;
-  opacity:.8;
+  opacity:.85;
   margin-top:.75rem;
 }
 
-/* === Hero section === */
+/* === HERO === */
 .hero{
   text-align:center;
   padding:3rem 1rem;
@@ -115,7 +113,7 @@ body::after{
   transform:translateY(-1px);
 }
 
-/* === Products === */
+/* === PRODUCTS === */
 .grid-wrap{width:min(1100px,92%);margin:0 auto;padding:3rem 0 4rem;}
 .card{
   border:1px solid #FFD70055;
@@ -128,7 +126,7 @@ body::after{
 .card:hover{
   transform:translateY(-6px) scale(1.02);
   border-color:#FFD700;
-  box-shadow:0 0 10px #FFD70088,0 0 20px #00ffff55,0 0 30px #ff00ff44;
+  box-shadow:0 0 10px #FFD70088,0 0 20px #00ffff55,0 0 30px #8a2be244;
 }
 .price{color:#e6e6e6}
 .title{color:#FFD700;font-weight:600}
