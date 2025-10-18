@@ -24,27 +24,35 @@ body{
   font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif;
   background:radial-gradient(circle at 50% 20%,#071222 0%,#010409 80%);
   overflow-x:hidden;
+  overflow-y:auto;
 }
 
 /* === starlight field === */
 #stars{
-  position:fixed;inset:0;z-index:-3;overflow:hidden;
+  position:fixed;
+  inset:0;
+  z-index:-1;      /* sits below content but above background */
+  overflow:hidden;
+  pointer-events:none;
 }
 .star{
-  position:absolute;border-radius:50%;
-  background:#fff;opacity:.1;
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,0.95) 0%,rgba(0,255,255,0.6) 80%,transparent 100%);
+  box-shadow:0 0 6px rgba(0,255,255,0.4);
+  opacity:.15;
   animation:twinkle 6s ease-in-out infinite;
 }
 @keyframes twinkle{
-  0%,100%{opacity:.1;transform:scale(1);}
+  0%,100%{opacity:.15;transform:scale(1);}
   50%{opacity:1;transform:scale(1.8);}
 }
 
-/* subtle color glow layer */
+/* subtle moving color glow */
 body::after{
   content:'';position:fixed;inset:0;z-index:-2;
   background:radial-gradient(40vw 40vw at var(--mx) var(--my),
-      rgba(30,230,230,.18),transparent 60%),
+      rgba(30,230,230,.15),transparent 60%),
       linear-gradient(120deg,var(--bg1),var(--bg2));
   background-blend-mode:screen;
   animation:slowGlow 30s linear infinite;
@@ -142,4 +150,46 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
       <img src="https://images.unsplash.com/photo-1585386959984-a41552261c39?w=1200&q=80" alt="">
       <div class="title">Wireless Earbuds X</div>
       <div class="meta">4.6★ · 8200 orders</div>
-      <div
+      <div class="price">$29.99</div>
+    </article>
+    <article class="card">
+      <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=1200&q=80" alt="">
+      <div class="title">Minimal Watch Steel</div>
+      <div class="meta">4.9★ · 740 orders</div>
+      <div class="price">$59.99</div>
+    </article>
+  </section>
+</div>
+
+<footer>© A1 Reps — starlit glassmorphic design.</footer>
+
+<script>
+/* create the bright stars */
+const field=document.getElementById('stars');
+const count=220; // star density
+for(let i=0;i<count;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const size=Math.random()*2+1.5;
+  s.style.width=s.style.height=size+'px';
+  s.style.left=Math.random()*100+'%';
+  s.style.top=Math.random()*100+'%';
+  s.style.animationDelay=(Math.random()*6)+'s';
+  field.appendChild(s);
+}
+
+/* gentle pointer glow */
+let raf=null;
+window.addEventListener('pointermove',e=>{
+  if(raf)return;
+  raf=requestAnimationFrame(()=>{
+    const x=(e.clientX/window.innerWidth)*100;
+    const y=(e.clientY/window.innerHeight)*100;
+    document.documentElement.style.setProperty('--mx',x+'%');
+    document.documentElement.style.setProperty('--my',y+'%');
+    raf=null;
+  });
+});
+</script>
+</body>
+</html>
