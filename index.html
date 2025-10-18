@@ -15,8 +15,6 @@
   --blur:14px; --radius:16px;
   --mx:50%; --my:50%;
 }
-
-/* === base === */
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -45,42 +43,34 @@ body::after{
 }
 @keyframes slowGlow{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}
 
-/* === FAST YELLOW TICKER === */
-.banner{
+/* === SLOT HEADER === */
+.header-slot{
   background:linear-gradient(90deg,#ffeb3b,#ffd500);
   color:#000;
   font-weight:700;
-  overflow:hidden;
-  white-space:nowrap;
-  position:sticky;
-  top:0;
-  z-index:20;
-  border-bottom:2px solid #fff;
-}
-.banner-content{
-  display:inline-block;
+  text-align:center;
   padding:10px 0;
+  border-bottom:2px solid #fff;
+  position:sticky;top:0;z-index:30;
   font-size:1rem;
-  animation:scrollBanner 8s linear infinite;
+  overflow:hidden;
 }
-@keyframes scrollBanner{
-  0%{transform:translateX(100%)}
-  100%{transform:translateX(-100%)}
+.header-message{
+  animation:fadeCycle 6s infinite;
 }
-.banner-content span{
-  margin:0 10rem; /* huge gap between messages */
+@keyframes fadeCycle{
+  0%,20%{opacity:1;transform:translateY(0);}
+  30%,40%{opacity:0;transform:translateY(-100%);}
+  50%,70%{opacity:1;transform:translateY(0);}
+  80%,100%{opacity:0;transform:translateY(100%);}
 }
 
-/* === HEADER === */
+/* === HEADER LOGO === */
 header{
   display:flex;justify-content:center;align-items:center;
-  padding:16px 20px;position:sticky;top:40px;z-index:10;
+  padding:16px 20px;position:sticky;top:42px;z-index:10;
   backdrop-filter:blur(12px);
 }
-.left-nav{position:absolute;left:20px;display:flex;gap:1rem}
-.left-nav a{color:var(--white);text-decoration:none;font-weight:600;opacity:.8;cursor:pointer}
-.left-nav a:hover{opacity:1}
-.right-space{position:absolute;right:20px;width:120px}
 .logo{
   font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:.18em;
   font-size:clamp(2.8rem,6vw,4rem);
@@ -98,26 +88,39 @@ header{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:18px;perspective:1000px;
 }
-@keyframes idleTilt{
-  0%,100%{transform:rotateX(0) rotateY(0)}
-  25%{transform:rotateX(3deg) rotateY(4deg)}
-  50%{transform:rotateX(-2deg) rotateY(-3deg)}
-  75%{transform:rotateX(2deg) rotateY(-2deg)}
-}
 .card{
+  position:relative;
   background:rgba(255,255,255,.08);
   border:1px solid var(--stroke);
   border-radius:var(--radius);
   padding:12px;
-  animation:idleTilt 6s ease-in-out infinite alternate;
   transform-style:preserve-3d;will-change:transform;
+  overflow:hidden;
   transition:transform .15s,box-shadow .2s;
 }
-.card:hover{animation:none;box-shadow:0 16px 36px rgba(0,0,0,.45)}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.45)}
 .card img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:8px}
 .card .title{font-weight:600}
 .card .meta{color:var(--muted);font-size:.85rem}
 .card .price{color:var(--aqua);font-weight:700;margin:4px 0}
+
+/* GLOWING BORDER TRAIL */
+.card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;
+  padding:2px;
+  background:linear-gradient(0deg,transparent 0%,transparent 40%,#fff 50%,transparent 60%,transparent 100%);
+  background-size:200% 200%;
+  animation:borderOrbit 2s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+}
+@keyframes borderOrbit{
+  0%{background-position:0% 0%}
+  100%{background-position:0% 200%}
+}
 
 footer{text-align:center;color:var(--muted);padding:24px 0}
 </style>
@@ -127,26 +130,16 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
 <!-- STARFIELD -->
 <div id="stars"></div>
 
-<!-- YELLOW RUNNING BANNER -->
-<div class="banner">
-  <div class="banner-content">
-    <span>✈️ Free Shipping Worldwide 🌎</span>
-    <span>💎 Top Quality Guaranteed 💎</span>
-    <span>🔥 10,000+ 5🌟 Reviews 🔥</span>
-  </div>
+<!-- SLOT HEADER -->
+<div class="header-slot">
+  <span id="slotText" class="header-message">✈️ Free Shipping Worldwide 🌎</span>
 </div>
 
 <header>
-  <nav class="left-nav">
-    <a id="navHome">Home</a>
-    <a id="navCats">Categories</a>
-  </nav>
   <div class="logo">A1 REPS</div>
-  <div class="right-space"></div>
 </header>
 
-<!-- HOME SECTION -->
-<section id="home" style="height:60vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+<section id="home" style="height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
   <h1 style="font-family:'Orbitron',sans-serif;font-size:2.5rem;letter-spacing:.1em;">Welcome to A1 REPS</h1>
   <p style="max-width:600px;color:var(--muted);margin-top:12px;">Luxury-inspired dropshipping store under a starlit digital sky. Scroll down to explore the collections.</p>
 </section>
@@ -183,10 +176,9 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
 <footer>© A1 Reps — starlit glassmorphic design.</footer>
 
 <script>
-/* create stars */
+/* === STAR CREATION === */
 const field=document.getElementById('stars');
-const count=220;
-for(let i=0;i<count;i++){
+for(let i=0;i<220;i++){
   const s=document.createElement('div');
   s.className='star';
   const size=Math.random()*2+1.5;
@@ -197,7 +189,24 @@ for(let i=0;i<count;i++){
   field.appendChild(s);
 }
 
-/* mouse glow */
+/* === SLOT MACHINE HEADER === */
+const messages=[
+  "✈️ Free Shipping Worldwide 🌎",
+  "💎 Top Quality Guaranteed 💎",
+  "🔥 10,000+ 5🌟 Reviews 🔥"
+];
+let idx=0;
+setInterval(()=>{
+  idx=(idx+1)%messages.length;
+  const el=document.getElementById('slotText');
+  el.style.opacity=0;
+  setTimeout(()=>{
+    el.textContent=messages[idx];
+    el.style.opacity=1;
+  },300);
+},2500);
+
+/* === MOUSE GLOW === */
 let raf=null;
 window.addEventListener('pointermove',e=>{
   if(raf)return;
@@ -209,10 +218,6 @@ window.addEventListener('pointermove',e=>{
     raf=null;
   });
 });
-
-/* navigation scroll */
-document.getElementById('navHome').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-document.getElementById('navCats').addEventListener('click',()=>document.getElementById('categories').scrollIntoView({behavior:'smooth'}));
 </script>
 </body>
 </html>
