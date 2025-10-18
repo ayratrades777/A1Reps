@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A1 Reps — Starlight Edition</title>
+<title>A1 Reps — Galactic Indigo Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg1:#01060d; --bg2:#03101e;
-  --white:#E9F3FF; --muted:#A9B9C9;
-  --aqua:#1EE6E6; --violet:#6A6CF6;
+  --white:#E9F3FF; 
+  --muted:#A9B9C9;
+  --aqua:#00eaff; 
+  --violet:#5c4dff; 
+  --indigo:#0a0121;
   --stroke:rgba(255,255,255,.12);
   --blur:14px; --radius:16px;
   --mx:50%; --my:50%;
@@ -21,81 +23,84 @@ body{
   min-height:100vh;
   color:var(--white);
   font-family:Inter,system-ui,Segoe UI,Roboto,sans-serif;
-  background:radial-gradient(circle at 50% 20%,#071222 0%,#010409 80%);
+  background:radial-gradient(circle at 40% 20%, #100437 0%, #060018 80%, #02000c 100%);
   overflow-x:hidden;
 }
 
-/* === STARS === */
+/* === STARFIELD === */
 #stars{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;}
 .star{
   position:absolute;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(255,255,0,.6) 80%,transparent 100%);
-  box-shadow:0 0 6px rgba(255,255,0,.4);
+  background:radial-gradient(circle,rgba(255,255,255,.95) 0%,rgba(120,160,255,.6) 80%,transparent 100%);
+  box-shadow:0 0 6px rgba(120,160,255,.4);
   opacity:.15;animation:twinkle 6s ease-in-out infinite;
 }
 @keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.8)}}
 
+/* animated galaxy haze */
 body::after{
   content:'';position:fixed;inset:0;z-index:-2;
-  background:radial-gradient(40vw 40vw at var(--mx) var(--my),
-      rgba(30,230,230,.15),transparent 60%),linear-gradient(120deg,var(--bg1),var(--bg2));
-  background-blend-mode:screen;animation:slowGlow 30s linear infinite;
+  background:radial-gradient(60vw 60vw at var(--mx) var(--my),
+      rgba(90,100,255,.25),transparent 60%),
+    linear-gradient(115deg,#050024,#0a0140 40%,#1e0080 80%);
+  background-blend-mode:screen;
+  animation:galaxyShift 50s linear infinite;
 }
-@keyframes slowGlow{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}
+@keyframes galaxyShift{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
+}
 
-/* === SLOT HEADER === */
-.header-slot{
+/* === TICKER HEADER === */
+.banner{
   background:linear-gradient(90deg,#ffeb3b,#ffd500);
   color:#000;
   font-weight:700;
-  text-align:center;
-  padding:10px 0;
-  border-bottom:2px solid #fff;
-  position:sticky;top:0;z-index:30;
-  font-size:1rem;
   overflow:hidden;
+  white-space:nowrap;
+  position:sticky;top:0;z-index:25;
+  border-bottom:2px solid #fff;
 }
-.header-message{
-  animation:fadeCycle 6s infinite;
+.banner-track{
+  display:inline-block;
+  padding:10px 0;
+  font-size:1rem;
+  animation:scrollTicker 12s linear infinite;
 }
-@keyframes fadeCycle{
-  0%,20%{opacity:1;transform:translateY(0);}
-  30%,40%{opacity:0;transform:translateY(-100%);}
-  50%,70%{opacity:1;transform:translateY(0);}
-  80%,100%{opacity:0;transform:translateY(100%);}
+@keyframes scrollTicker{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+.banner-track span{
+  margin:0 8rem;
 }
 
 /* === HEADER LOGO === */
 header{
   display:flex;justify-content:center;align-items:center;
-  padding:16px 20px;position:sticky;top:42px;z-index:10;
+  padding:16px 20px;position:sticky;top:40px;z-index:10;
   backdrop-filter:blur(12px);
 }
 .logo{
   font-family:'Orbitron',sans-serif;font-weight:900;letter-spacing:.18em;
   font-size:clamp(2.8rem,6vw,4rem);
-  background:linear-gradient(90deg,#00ffff,#6A6CF6,#00ffff);
+  background:linear-gradient(90deg,#00eaff,#5c4dff,#00eaff);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   animation:logoShine 3s linear infinite,logoPulse 1.5s ease-in-out infinite alternate;
-  text-shadow:0 0 10px rgba(0,255,255,.7),0 0 20px rgba(106,108,246,.5);
+  text-shadow:0 0 15px rgba(120,160,255,.6),0 0 25px rgba(0,234,255,.4);
 }
 @keyframes logoShine{from{background-position:0%}to{background-position:200%}}
 @keyframes logoPulse{0%{transform:scale(1)}100%{transform:scale(1.08)}}
 
-/* === GRID + CARDS === */
+/* === PRODUCTS === */
 .container{max-width:1240px;margin:40px auto;padding:0 16px}
-.grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:18px;perspective:1000px;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
 .card{
   position:relative;
   background:rgba(255,255,255,.08);
   border:1px solid var(--stroke);
   border-radius:var(--radius);
-  padding:12px;
-  transform-style:preserve-3d;will-change:transform;
-  overflow:hidden;
+  padding:12px;overflow:hidden;
   transition:transform .15s,box-shadow .2s;
 }
 .card:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.45)}
@@ -104,44 +109,45 @@ header{
 .card .meta{color:var(--muted);font-size:.85rem}
 .card .price{color:var(--aqua);font-weight:700;margin:4px 0}
 
-/* GLOWING BORDER TRAIL */
+/* glowing orbit border */
 .card::before{
-  content:'';position:absolute;inset:0;border-radius:inherit;
+  content:"";position:absolute;inset:0;border-radius:inherit;
   padding:2px;
-  background:linear-gradient(0deg,transparent 0%,transparent 40%,#fff 50%,transparent 60%,transparent 100%);
-  background-size:200% 200%;
-  animation:borderOrbit 2s linear infinite;
+  background:linear-gradient(270deg,#00eaff,#5c4dff,#00eaff);
+  background-size:400% 400%;
+  animation:borderRun 3s linear infinite;
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;
   mask-composite:exclude;
 }
-@keyframes borderOrbit{
-  0%{background-position:0% 0%}
-  100%{background-position:0% 200%}
-}
+@keyframes borderRun{0%{background-position:400% 0}100%{background-position:0 0}}
 
 footer{text-align:center;color:var(--muted);padding:24px 0}
 </style>
 </head>
 <body>
 
-<!-- STARFIELD -->
 <div id="stars"></div>
 
-<!-- SLOT HEADER -->
-<div class="header-slot">
-  <span id="slotText" class="header-message">✈️ Free Shipping Worldwide 🌎</span>
+<!-- Yellow endless ticker -->
+<div class="banner">
+  <div class="banner-track">
+    <span>✈️ Free Shipping Worldwide 🌎</span>
+    <span>💎 Top Quality Guaranteed 💎</span>
+    <span>🔥 10,000+ 5🌟 Reviews 🔥</span>
+    <span>✈️ Free Shipping Worldwide 🌎</span>
+    <span>💎 Top Quality Guaranteed 💎</span>
+    <span>🔥 10,000+ 5🌟 Reviews 🔥</span>
+  </div>
 </div>
 
-<header>
-  <div class="logo">A1 REPS</div>
-</header>
+<header><div class="logo">A1 REPS</div></header>
 
 <section id="home" style="height:50vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
   <h1 style="font-family:'Orbitron',sans-serif;font-size:2.5rem;letter-spacing:.1em;">Welcome to A1 REPS</h1>
-  <p style="max-width:600px;color:var(--muted);margin-top:12px;">Luxury-inspired dropshipping store under a starlit digital sky. Scroll down to explore the collections.</p>
+  <p style="max-width:600px;color:var(--muted);margin-top:12px;">Luxury-inspired dropshipping store under an indigo galaxy sky. Scroll down to explore the collections.</p>
 </section>
 
 <div class="container">
@@ -173,10 +179,10 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
   </section>
 </div>
 
-<footer>© A1 Reps — starlit glassmorphic design.</footer>
+<footer>© A1 Reps — Galactic Indigo Edition.</footer>
 
 <script>
-/* === STAR CREATION === */
+/* stars */
 const field=document.getElementById('stars');
 for(let i=0;i<220;i++){
   const s=document.createElement('div');
@@ -188,25 +194,7 @@ for(let i=0;i<220;i++){
   s.style.animationDelay=(Math.random()*6)+'s';
   field.appendChild(s);
 }
-
-/* === SLOT MACHINE HEADER === */
-const messages=[
-  "✈️ Free Shipping Worldwide 🌎",
-  "💎 Top Quality Guaranteed 💎",
-  "🔥 10,000+ 5🌟 Reviews 🔥"
-];
-let idx=0;
-setInterval(()=>{
-  idx=(idx+1)%messages.length;
-  const el=document.getElementById('slotText');
-  el.style.opacity=0;
-  setTimeout(()=>{
-    el.textContent=messages[idx];
-    el.style.opacity=1;
-  },300);
-},2500);
-
-/* === MOUSE GLOW === */
+/* mouse glow */
 let raf=null;
 window.addEventListener('pointermove',e=>{
   if(raf)return;
