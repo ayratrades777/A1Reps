@@ -37,7 +37,6 @@ body{
 }
 @keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:1;transform:scale(1.8)}}
 
-/* subtle color glow */
 body::after{
   content:'';position:fixed;inset:0;z-index:-2;
   background:radial-gradient(40vw 40vw at var(--mx) var(--my),
@@ -46,7 +45,7 @@ body::after{
 }
 @keyframes slowGlow{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}
 
-/* === TICKER BANNER === */
+/* === FAST YELLOW TICKER === */
 .banner{
   background:linear-gradient(90deg,#ffeb3b,#ffd500);
   color:#000;
@@ -62,11 +61,14 @@ body::after{
   display:inline-block;
   padding:10px 0;
   font-size:1rem;
-  animation:scrollBanner 20s linear infinite;
+  animation:scrollBanner 8s linear infinite;
 }
 @keyframes scrollBanner{
   0%{transform:translateX(100%)}
   100%{transform:translateX(-100%)}
+}
+.banner-content span{
+  margin:0 10rem; /* huge gap between messages */
 }
 
 /* === HEADER === */
@@ -128,7 +130,9 @@ footer{text-align:center;color:var(--muted);padding:24px 0}
 <!-- YELLOW RUNNING BANNER -->
 <div class="banner">
   <div class="banner-content">
-    ✈️ Free Shipping Worldwide 🌎  •  💎 Top Quality Guaranteed 💎  •  🔥 10,000+ 5🌟 Reviews 🔥 • 
+    <span>✈️ Free Shipping Worldwide 🌎</span>
+    <span>💎 Top Quality Guaranteed 💎</span>
+    <span>🔥 10,000+ 5🌟 Reviews 🔥</span>
   </div>
 </div>
 
